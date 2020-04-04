@@ -11,9 +11,9 @@ Since the Windows Subsystem for Linux (WSL) doesn't use a bootloader in order to
 First, you will need to install Tiny Core as a WSL distro. Download the latest Tiny Core .iso image for x86_64 (avaialable [here](http://www.tinycorelinux.net/)). Mount it using File Explorer, then navigate into the "boot" folder.
 ![Contents of "boot" folder](images/bootfolder.png)
 
-We're interested in the .gz file here (corepure64.gz in this case). Inside it there is a cpio archive which contains the entire OS except for the kernel, which WSL will provide. That archive needs to be converted into tar format in order for it to be imported as a WSL distro, and we can't just do it using 7-Zip.
+We're interested here in corepure64.gz. Inside it there is a cpio archive which contains the entire OS except for the kernel, which WSL will provide. That archive needs to be converted into tar format in order for it to be imported as a WSL distro, and we can't just do it using 7-Zip.
 
-In order to convert the gzipped cpio archive into a .tar, we'll need another distro already installed in WSL, such as Debian, Ubuntu, SUSE etc. I've prepared a script called "cpiogz2tar" (available [here](https://github.com/zkedem/cpiogz2tar)) to perform the conversion in one go. The conversion will have to be done as root on a GNU/Linux filesystem (necessary to preserve ownership/permissions), so start by copying corepure64.gz (or whatever it's called for you) into your existing distro:
+In order to convert the gzipped cpio archive into a .tar, we'll need another distro already installed in WSL, such as Debian, Ubuntu, SUSE etc. I've prepared a script called "cpiogz2tar" (available [here](https://github.com/zkedem/cpiogz2tar)) to perform the conversion in one go. The conversion will have to be done as root on a GNU/Linux filesystem (necessary to preserve ownership/permissions), so start by copying corepure64.gz into your existing distro:
 
 `$ pwd`
 
