@@ -14,12 +14,17 @@ First, you will need to install Tiny Core as a WSL distro. Download the latest T
 We're interested in the .gz file here (corepure64.gz in this case). Inside it there is a cpio archive which contains the entire OS except for the kernel, which WSL will provide. That archive needs to be converted into tar format in order for it to be imported as a WSL distro, and we can't just do it using 7-Zip.
 
 In order to convert the gzipped cpio archive into a .tar, we'll need another distro already installed in WSL, such as Debian, Ubuntu, SUSE etc. I've prepared a script called "cpiogz2tar" (available [here](https://github.com/zkedem/cpiogz2tar)) to perform the conversion in one go. The conversion will have to be done as root on a GNU/Linux filesystem (necessary to preserve ownership/permissions), so start by copying corepure64.gz (or whatever it's called for you) into your existing distro:
+
 `$ pwd`
+
 `/mnt/l/boot`
+
 `$ cp corepure64.gz ~/`
 
 Download cpiogz2tar and make it executable:
+
 `$ wget https://raw.githubusercontent.com/zkedem/cpiogz2tar/master/cpiogz2tar`
+
 `$ chmod +x cpiogz2tar`
 
 Run cpiogz2tar as root:
