@@ -14,17 +14,17 @@ First, you will need to install Tiny Core as a WSL distro. Download the latest T
 We're interested in the .gz file here (corepure64.gz in this case). Inside it there is a cpio archive which contains the entire OS except for the kernel, which WSL will provide. That archive needs to be converted into tar format in order for it to be imported as a WSL distro, and we can't just do it using 7-Zip.
 
 In order to convert the gzipped cpio archive into a .tar, we'll need another distro already installed in WSL, such as Debian, Ubuntu, SUSE etc. I've prepared a script called "cpiogz2tar" (available [here](https://github.com/zkedem/cpiogz2tar)) to perform the conversion in one go. The conversion will have to be done as root on a GNU/Linux filesystem (necessary to preserve ownership/permissions), so start by copying corepure64.gz (or whatever it's called for you) into your existing distro:
-<code>$ pwd
-/mnt/l/boot
+<code>$ pwd<br>
+/mnt/l/boot<br>
 $ cp corepure64.gz ~/</code>
 
 Download cpiogz2tar:
-<code>$ wget https://raw.githubusercontent.com/zkedem/cpiogz2tar/master/cpiogz2tar
+<code>$ wget https://raw.githubusercontent.com/zkedem/cpiogz2tar/master/cpiogz2tar<br>
 $ chmod +x cpiogz2tar</code>
 
 Run cpiogz2tar as root:
-<code>$ sudo su
-\# ./cpiogz2tar corepure64.gz
+<code>$ sudo su<br>
+\# ./cpiogz2tar corepure64.gz<br>
 \# exit</code>
 
 Copy the resulting .tar back into Windows:
@@ -41,8 +41,8 @@ This command tells Tiny Core to go straight into a root shell rather than the no
 ![Tiny Core shell prompt](images/setup1.png)
 
 After a few seconds, the shell prompt will appear. Download wsl-tcl-setup into an appropriate folder (I'm using C:\\TinyCore) and change to it. Once you're there, make wsl-tcl-setup executable and run it:
-<code># cd /mnt/c/TinyCore
-\# chmod +x wsl-tcl-setup
+<code># cd /mnt/c/TinyCore<br>
+\# chmod +x wsl-tcl-setup<br>
 \# ./wsl-tcl-setup</code>
 ![Tiny Core shell prompt](images/setup2.png)
 (Excuse the ash error in the screenshot; it was fixed before uploading)
