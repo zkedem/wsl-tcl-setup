@@ -1,0 +1,25 @@
+#!/bin/busybox ash
+
+echo This script prepares Tiny Core to run on WSL.
+. /etc/init.d/tc-functions
+checkroot
+
+echo Creating /etc/sysconfig/tcuser...
+if [ ! -f /etc/sysconfig/tcuser ]; then
+	> /etc/sysconfig/tcuser
+fi
+
+echo Preparing home directory for default user...
+if [ ! -d /home/tc ]; then
+        mkdir -p /home/tc
+fi
+
+echo Preparing TCE directory...
+if [ ! -d /etc/sysconfig/tcedir/optional ]; then
+	mkdir -p /etc/sysconfig/tcedir/optional
+fi
+
+echo Patching tce-load for root privileges...
+sed -i.bak -e "s.checknotroot.checkroot." /usr/bin/tce-load
+
+echo Done!
