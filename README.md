@@ -28,33 +28,43 @@ Download cpiogz2tar and make it executable:
 `$ chmod +x cpiogz2tar`
 
 Run cpiogz2tar as root:
+
 `$ sudo su`
+
 `# ./cpiogz2tar corepure64.gz`
+
 `# exit`
 
 Copy the resulting .tar back into Windows:
+
 `$ cp corepure64.tar /mnt/c`
 
 In the Command Prompt, use wsl.exe to install Tiny Core:
+
 `C:\>wsl.exe --import TinyCore C:\TinyCore corepure64.tar --version 2`
+
 The "--version 2" is important; this installs Tiny Core as a WSL 2 distro. Since WSL 2 uses virtualization + an actual Linux kernel, it allows Tiny Core to access features such as loop device support, which is needed for it to function properly.
 
 ### Setting up Tiny Core
 Now we're ready to start up Tiny Core for the first time!
+
 `C:\>wsl -d TinyCore -e /bin/sh`
+
 This command tells Tiny Core to go straight into a root shell rather than the normal "bootup" process. We only need to do it this one time.
 ![Tiny Core shell prompt](images/setup1.png)
 
 After a few seconds, the shell prompt will appear. Download wsl-tcl-setup into an appropriate folder (I'm using C:\\TinyCore) and change to it. Once you're there, make wsl-tcl-setup executable and run it:
+
 `# cd /mnt/c/TinyCore`
+
 `# chmod +x wsl-tcl-setup`
+
 `# ./wsl-tcl-setup`
+
 ![Tiny Core shell prompt](images/setup2.png)
 (Excuse the ash error in the screenshot; it was fixed before uploading)
 
-You can at this point exit the root shell. Now back at the Command Prompt, type
-`C:\>wsl -d TinyCore`
-to start using Tiny Core for real. Because Tiny Core thinks it's running natively and not as a virtualized instance, it will display a login prompt once it's initialized. Just enter the username "tc" with no password:
+You can at this point exit the root shell. Now back at the Command Prompt, type `C:\>wsl -d TinyCore` to start using Tiny Core for real. Because Tiny Core thinks it's running natively and not as a virtualized instance, it will display a login prompt once it's initialized. Just enter the username "tc" with no password:
 ![First login](images/login.png)
 
 Now you can install extensions!
