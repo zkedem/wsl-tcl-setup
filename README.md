@@ -15,56 +15,56 @@ We're interested here in corepure64.gz. Inside it there is a cpio archive which 
 
 In order to convert the gzipped cpio archive into a .tar, we'll need another distro already installed in WSL, such as Debian, Ubuntu, SUSE etc. I've prepared a script called "cpiogz2tar" (available [here](https://github.com/zkedem/cpiogz2tar)) to perform the conversion in one go. The conversion will have to be done as root on a GNU/Linux filesystem (necessary to preserve ownership/permissions), so start by copying corepure64.gz into your existing distro:
 
-`$ pwd`
-
-`/mnt/l/boot`
-
-`$ cp corepure64.gz ~/`
-
+```
+$ pwd
+/mnt/l/boot
+$ cp corepure64.gz ~/
+```
 Download cpiogz2tar and make it executable:
 
-`$ wget https://raw.githubusercontent.com/zkedem/cpiogz2tar/master/cpiogz2tar`
-
-`$ chmod +x cpiogz2tar`
-
+```
+$ wget https://raw.githubusercontent.com/zkedem/cpiogz2tar/master/cpiogz2tar`
+$ chmod +x cpiogz2tar
+```
 Run cpiogz2tar as root:
 
-`$ sudo su`
-
-`# ./cpiogz2tar corepure64.gz`
-
-`# exit`
-
+```
+$ sudo su
+# ./cpiogz2tar corepure64.gz
+# exit
+```
 Copy the resulting .tar back into Windows:
 
-`$ cp corepure64.tar /mnt/c`
-
+```
+$ cp corepure64.tar /mnt/c
+```
 In the Command Prompt, use wsl.exe to install Tiny Core:
 
-`C:\>wsl.exe --import TinyCore C:\TinyCore corepure64.tar --version 2`
-
+```
+C:\>wsl.exe --import TinyCore C:\TinyCore corepure64.tar --version 2
+```
 The "--version 2" is important; this installs Tiny Core as a WSL 2 distro. Since WSL 2 uses virtualization + an actual Linux kernel, it allows Tiny Core to access features such as loop device support, which is needed for it to function properly.
 
 ### Setting up Tiny Core
 Now we're ready to start up Tiny Core for the first time!
 
-`C:\>wsl -d TinyCore -e /bin/sh`
-
+```
+C:\>wsl -d TinyCore -e /bin/sh
+```
 This command tells Tiny Core to go straight into a root shell rather than the normal "bootup" process. We only need to do it this one time.
 ![Tiny Core shell prompt](images/setup1.png)
 
 After a few seconds, the shell prompt will appear. Download wsl-tcl-setup into an appropriate folder (I'm using C:\\TinyCore) and change to it. Once you're there, make wsl-tcl-setup executable and run it:
 
-`# cd /mnt/c/TinyCore`
-
-`# chmod +x wsl-tcl-setup`
-
-`# ./wsl-tcl-setup`
-
+```
+# cd /mnt/c/TinyCore
+# chmod +x wsl-tcl-setup
+# ./wsl-tcl-setup
+```
 ![Tiny Core shell prompt](images/setup2.png)
 (Excuse the ash error in the screenshot; it was fixed before uploading)
 
-You can at this point exit the root shell. Now back at the Command Prompt, type `C:\>wsl -d TinyCore` to start using Tiny Core for real. Because Tiny Core thinks it's running natively and not as a virtualized instance, it will display a login prompt once it's initialized. Just enter the username "tc" with no password:
+You can at this point exit the root shell. Now back at the Command Prompt, type "wsl -d TinyCore" to start using Tiny Core for real. Because Tiny Core thinks it's running natively and not as a virtualized instance, it will display a login prompt once it's initialized. Just enter the username "tc" with no password:
 ![First login](images/login.png)
 
 Now you can install extensions!
